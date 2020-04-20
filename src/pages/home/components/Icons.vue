@@ -65,8 +65,13 @@
             pages(){
                 const pages = []
                 this.iconList.forEach((item,index)=>{
-                    const page =
+                    const page = Math.floor(index/8)
+                    if( !pages[page]){
+                        pages[page] = []
+                    }
+                    pages[page].push(item)
                 })
+                return pages;
             }
         }
     }
