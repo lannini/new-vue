@@ -7,15 +7,21 @@
 			<span class="iconfont">&#xe744;</span>
 		  输入城市/景点/游玩主题
 		</div>
-        <div class="header-right">
-			<span class="iconfont arrow-icon">&#xe673;</span>
-		</div>
+        <router-link to="/city">
+            <div class="header-right">
+                {{city}}
+                <span class="iconfont arrow-icon">&#xe673;</span>
+            </div>
+        </router-link>
     </div>
 </template>
 
 <script>
     export default{
-        name:'HomeHeader'
+        name:'HomeHeader',
+        props:{
+            city:String
+        }
     }
 </script>
 <style lang="stylus" scoped>
