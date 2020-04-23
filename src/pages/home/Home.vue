@@ -9,6 +9,7 @@
 </template>
 
 <script>
+    import { mapState} from 'vuex'
     import  HomeHeader from './components/Header'
     import  HomeSwiper from './components/Swiper'
     import  HomeIcons from './components/Icons'
@@ -26,15 +27,19 @@
         },
         data(){
             return{
+                lastCity:'',
                 swiperList:[],
                 iconList:[],
                 recommendList:[],
                 weekendList:[]
             }
         },
+        computed:{
+            ...mapState(['city'])
+        },
         methods:{
             getHomeInfo(){
-                axios.get('/api/index.json')
+                axios.get('/api/index.json?city='+this.city)
                     .then(this.getHomeInfoSucc)
             },
             getHomeInfoSucc(res){
@@ -48,8 +53,15 @@
                 }
             }
         },
-        mounted(){
+        mounted(){  //页面挂载时，一定发一个ajax请求
+            this.lastCity = this.city
             this.getHomeInfo()
+        },
+        activated(){ //页面重新被显示时，会被执行
+            if( this.lastCity !== this.city ){
+                this.lastCity = this.city
+                this.getHomeInfo()
+            }
         }
     }
 </script>

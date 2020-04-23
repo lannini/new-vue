@@ -9,7 +9,7 @@
 		</div>
         <router-link to="/city">
             <div class="header-right">
-                {{this.$store.state.city}}
+                {{this.city}}
                 <span class="iconfont arrow-icon">&#xe673;</span>
             </div>
         </router-link>
@@ -17,8 +17,14 @@
 </template>
 
 <script>
+    import {mapState,mapGetters} from 'vuex'
     export default{
         name:'HomeHeader',
+        computed:{
+            //['city']={city:'city'}映射什么？把vuex里面的公用数据'city',映射到名字叫city的计算属性里
+            ...mapState(['city']), //...三个点是展开运算符 mapState 是指把 vuex里面的数据映射到这个组件computed的计算属性里
+            ...mapGetters(['doubleCity'])
+        }
     }
 </script>
 <style lang="stylus" scoped>
